@@ -14,7 +14,7 @@ knitr::opts_chunk$set(echo = FALSE)
 # https://rmarkdown.rstudio.com/lesson-7.html
 # https://bookdown.org/yihui/rmarkdown/html-document.html
 # https://stackoverflow.com/questions/33319457/display-a-data-frame-as-table-in-r-markdown
-# https://cran.r-project.org/web/packages/knitr/knitr.pdf
+# https://cran.r-project.org/web/packages/knitr/knitr.pdf 
 # https://stackoverflow.com/questions/24254552/knitr-style-table-with-css
 
 # Libreriras a utilizar
