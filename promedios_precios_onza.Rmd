@@ -1,0 +1,47 @@
+---
+title: "Precio Promedio Onza de Marihuana"
+author: "Mauricio Correa Arango"
+date: "7 de mayo de 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r librerias, message=FALSE, warning=FALSE}
+# Referencias utilizadas
+# https://rmarkdown.rstudio.com/lesson-7.html
+# https://bookdown.org/yihui/rmarkdown/html-document.html
+# https://stackoverflow.com/questions/33319457/display-a-data-frame-as-table-in-r-markdown
+# https://cran.r-project.org/web/packages/knitr/knitr.pdf
+# https://stackoverflow.com/questions/24254552/knitr-style-table-with-css
+
+# Libreriras a utilizar
+library(dplyr)
+```
+
+```{r Datos}
+# Datos a utilizar
+precios <- read.csv("~/github/Tablas-Cruzadas-en-R---II/Precios marihuana.txt")
+```
+
+```{r DatosFiltrados}
+Precios_Estados <- filter(precios, precios$state %in% c("California","New York","Illinois"))
+```
+
+```{r PromedioPrecios, echo=FALSE}
+promedio_onza <- Precios_Estados %>% 
+  group_by(ppo,quality,state) %>% 
+  summarise(mean_price = mean(price))
+```
+
+```{r , results='asis'}
+writeLines("td, th { padding : 6px } 
+           th { background-color : gray ; color : white; border : 1px solid white; } 
+           td { color : black ; border : 1px solid gray }", 
+           con = "mystyle.css")
+
+knitr::kable(promedio_onza, format = "html", col.names = c("Onza", "Calidad", "Estado", "Promedio"))
+```
+
