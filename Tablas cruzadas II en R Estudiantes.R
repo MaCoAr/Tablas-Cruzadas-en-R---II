@@ -22,7 +22,11 @@ library(dplyr)
 #Asegurese de remover el signo $ de la columna Revenue y de
 #Escriba el argumento header=TRUE para que R reconozca los encabezados del archivo.
 
+
 precios <- read.csv("~/github/Tablas-Cruzadas-en-R---II/Precios marihuana.txt")
+
+# path_file = file.choose()
+# precios <- read.csv(path_file)
 
 
 #Use las funciones filter, group_by y summarise de la librería dplyr para
@@ -45,10 +49,14 @@ View(state_quality)
 #los tres #estados analizados
 
 promedio_onza <- Precios_Estados %>% 
-  group_by(ppo,quality,state) %>% 
-  summarise(mean_price = mean(price))
+  group_by(quality,state) %>% 
+  summarise(mean_price = mean(price), mean_ppo = mean(ppo))
 View(promedio_onza)
 
 #Presente este precio promedio en un documento
 
+# Crear documento HTML con los precios promedio x onza 
 knitr::knit2html(rmarkdown::render("promedios_precios_onza.Rmd"), stylesheet = 'mystyle.css')
+# Arbir el archivo HTML creado en el navegador por defecto
+htmlFile <- file.path("promedios_precios_onza.html")
+rstudioapi::viewer(htmlFile)

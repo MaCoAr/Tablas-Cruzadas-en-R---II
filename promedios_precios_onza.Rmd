@@ -32,8 +32,8 @@ Precios_Estados <- filter(precios, precios$state %in% c("California","New York",
 
 ```{r PromedioPrecios, echo=FALSE}
 promedio_onza <- Precios_Estados %>% 
-  group_by(ppo,quality,state) %>% 
-  summarise(mean_price = mean(price))
+  group_by(quality,state) %>% 
+  summarise(mean_price = mean(price), mean_ppo = mean(ppo))
 ```
 
 ```{r , results='asis'}
@@ -42,6 +42,6 @@ writeLines("td, th { padding : 6px }
            td { color : black ; border : 1px solid gray }", 
            con = "mystyle.css")
 
-knitr::kable(promedio_onza, format = "html", col.names = c("Onza", "Calidad", "Estado", "Promedio"))
+knitr::kable(promedio_onza, format = "html", col.names = c("Calidad", "Estado", "Precio Promedio", "Promedio Onza"))
 ```
 
